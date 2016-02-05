@@ -7,7 +7,7 @@ $DEBUG_PROD=0;
 $DEBUG_TEST=4;
 
 $app->set('GUI','gui/');
-$app->set('DEBUG',$DEBUG_TEST);
+$app->set('DEBUG',$DEBUG_PROD);
 $app->set('top_menu',
 	array(
 		'/'=>'Home',
@@ -24,9 +24,9 @@ $app->set('side_menu',
 	)
 );
 
-$TEST_DB ='sqlite:./db/postbox.sqlite';
+$DB ='sqlite:./db/postbox.sqlite';
 
-$app->set('POSTBOX_DB',new DB($TEST_DB));
+$app->set('POSTBOX_DB',new DB($DB));
 $app->set('APP_LEVEL_SECRET_TOKEN','SECRET_TOEKN_PASSWORD_CHANGE');
 
 $app->route('GET /','Main->home');

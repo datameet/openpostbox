@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><?= $this->get('title'); ?></title>
+	<link rel="icon" href="<?= $this->get('BASE'); ?>/gui/img/postal.png" />
+	<link rel="shortcut icon" href="<?= $this->get('BASE'); ?>/gui/img/postal.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="<?= $this->get('BASE'); ?>/gui/bootstrap/css/bootstrap_spacelab.css" rel="stylesheet">
+	<link href="<?= $this->get('BASE'); ?>/gui/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+ <!--[if lte IE 8]>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+ <![endif]-->
+<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+
+<link rel="stylesheet" href="<?= $this->get('BASE'); ?>/gui/mapcluster/MarkerCluster.css" />
+<link rel="stylesheet" href="<?= $this->get('BASE'); ?>/gui/mapcluster/MarkerCluster.Default.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="<?= $this->get('BASE'); ?>/gui/mapcluster/MarkerCluster.Default.ie.css" /><![endif]-->
+<script src="<?= $this->get('BASE'); ?>/gui/mapcluster/leaflet.markercluster-src.js"></script>
+
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
+<style>
+</style>
+</head>
+<body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
+
+
+
+  <!-- Navbar
+    ================================================== -->
+  <div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container" style="width: auto;">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">Open Post Box</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+              <? foreach ($this->get('top_menu') as $key=>$value): ?>
+                <? if ($this->get('title')==$value): ?>
+                   <li class="active"><a href="<?= $this->get('BASE').($key=='/'?$key:('/'.$key)); ?>"><?= $value; ?></a></li>               
+                <? else: ?>
+                    <li><a href="<?= $this->get('BASE').($key=='/'?$key:('/'.$key)); ?>"><?= $value; ?></a></li>
+                <? endif; ?>
+              <? endforeach; ?> 
+          </ul>
+          <form class="navbar-search pull-right" method="get" action="<?= $this->get('BASE');?>/pb/search/">
+            <input type="text" class="search-query span2" name="pincode" placeholder="Pincode">
+          </form>
+        </div><!-- /.nav-collapse -->
+      </div>
+    </div><!-- /navbar-inner -->
+  </div><!-- /navbar -->
+
+
+
+    <div class="container">
+
+
+<!-- Masthead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="row">
+    <div class="span6">
+      <h2><?= $this->get('title'); ?></h2>
+      <p class="lead"><?= $this->get('caption'); ?></p>
+    </div>
+    <div class="span6">
+      <?php
+       if($this->get('is_home')){ 
+      ?>
+           <div class="well">
+              <?= $this->get('post_count'); ?> postboxes submitted by <?= $this->get('user_count'); ?> users as of <?=date('l dS \o\f F Y', strtotime("now")) ?>. 
+           </div>
+      <?php
+          }else if ($this->get('notes')){ 
+
+      ?>
+            <div class="well">
+              <?= $this->get('notes'); ?>  
+           </div>
+
+      <?php
+        }
+      ?>
+    </div>
+  </div>
+
+</header>
+
+
+<!-- main section
+================================================== -->
+<section id="main_section" style="height:700px;">
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span2">
+      <div class="well">
+        <h3>PostBoxes</h3>
+        <h4><a href="<?=$this->get('BASE')?>/pb/location/map">On Map</a></h4>
+        <h4><a href="<?=$this->get('BASE')?>/pb/location/list/states">By States</a></h4>
+        <h4><a href="<?=$this->get('BASE')?>/pb/list/pincode">By Pincode</a></h4>
+        <h4><a href="<?=$this->get('BASE')?>/pb/contributor/list">By Contributer</a></h4>
+        
+      </div>
+    </div>
+
+    <div class="span10">
+          <?= $this->get('sub_out_put'); ?>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+    <br>
+     <!-- Footer
+      ================================================== -->
+      <footer class="footer">
+        <p class="pull-left">Version: <a href="http://code.thejeshgn.com/kannu/commits/all/">LOCAL_CODE_VERSION</a> &bull; Page generated in <?= sprintf('%.3f',microtime(TRUE)-$this->get('timer')); ?> secs &bull; Memory consumed <?= sprintf('%.3f',memory_get_peak_usage()/1e6); ?> Mbytes</p>
+
+        <p class="pull-right"><a href="http://thejeshgn.com"><img src="<?= $this->get('BASE'); ?>/gui/img/thejeshgn-name.png" width="100px"/></a></p>
+      </footer>
+
+  </div><!-- /container -->
+
+	
+</body>
+<script type="text/javascript">stLight.options({publisher: "a4a67f2c-cc15-489d-bb0c-0173bc71d84d"});</script>
+<script>
+var options={ "publisher": "a4a67f2c-cc15-489d-bb0c-0173bc71d84d", "position": "left", "ad": { "visible": false, "openDelay": 5, "closeDelay": 0}, "chicklets": { "items": ["facebook", "twitter", "linkedin", "pinterest", "email", "sharethis"]}};
+var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
+</script>
+
+</html>

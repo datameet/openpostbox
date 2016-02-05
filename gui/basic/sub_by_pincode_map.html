@@ -1,0 +1,23 @@
+ <div style="width: 900px; height: 500px;float:left;">
+ <div id="map"  style="width: 900px; height: 500px;"></div>
+ </div>
+
+<script>
+	var map = L.map('map').setView([<?=$this->get('center_lat')?>, <?=$this->get('center_lan')?>], 14);
+
+
+	var mapquestUrl = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+	subDomains = ['otile1','otile2','otile3','otile4'];
+	var mapquest = new L.TileLayer(mapquestUrl, {maxZoom: 18, subdomains: subDomains});
+	mapquest.addTo(map);
+
+
+    <? foreach ($this->get('array_all_postboxes') as $post_box=>$post_box_array): ?>
+	    var marker = L.marker([<?=$post_box_array['lat']?>,<?=$post_box_array['lan']?>]).addTo(map);
+	    var infohtml = "<b><?=$post_box_array['caption']?></b><br>";
+	    infohtml = infohtml + "<img src='<?= $post_box_array['picture_url'] ?>' width=100px height=100px /><br>";
+	    infohtml = infohtml + "<a href='<?= $this->get('BASE'); ?>/pb/id/<?=$post_box_array['post_id']?>'>Detailed Information</a>";
+		marker.bindPopup(infohtml);
+    <? endforeach; ?>
+</script>
+

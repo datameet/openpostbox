@@ -1,0 +1,16 @@
+    <table class="table table-hover">
+    <thead>
+    	<tr>
+    		<th> PostBox </th>
+    		<th> Address </th>
+    	</tr>
+    </thead>
+    <? foreach ($this->get('array_all_postboxes') as $post_box=>$post_box_array): ?>
+    <tbody>
+          	<tr>
+    		<td> <a href='<?= $this->get('BASE'); ?>/pb/id/<?=$post_box_array['post_id']?>'><?=$post_box_array['caption']?></a> </td>
+    		<td> <?=$post_box_array['formatted_address']?> </td>
+    		</tr>
+     </tbody>
+    <? endforeach; ?>
+</table>

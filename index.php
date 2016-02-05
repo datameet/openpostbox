@@ -24,7 +24,7 @@ $app->set('side_menu',
 	)
 );
 
-$DB ='sqlite:./db/postbox.sqlite';
+$DB ='sqlite:../postbox.sqlite';
 
 $app->set('POSTBOX_DB',new DB($DB));
 $app->set('APP_LEVEL_SECRET_TOKEN','SECRET_TOEKN_PASSWORD_CHANGE');

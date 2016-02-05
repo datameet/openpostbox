@@ -1,7 +1,7 @@
 <?php
 class Main extends F3instance {
 	function home() {
-		$this->set('title','Home');
+		$this->set('title','Open Postbox | India');
 		$this->set('caption','Latest postboxes added.');
 		$q = 'select * from post_box order by cast(created_time as int) desc limit 5';
 		$POSTBOX_DB=F3::get('POSTBOX_DB');

@@ -1,9 +1,10 @@
 <?php
 date_default_timezone_set('Asia/Calcutta');
 $app=require __DIR__.'/lib/base.php';
+require __DIR__.'/utils/front_end.php';
 $app->set('AUTOLOAD','inc/;inc/temp/');
 $DEBUG_PROD=0;
-$DEBUG_TEST=3;
+$DEBUG_TEST=4;
 
 $app->set('GUI','gui/');
 $app->set('DEBUG',$DEBUG_TEST);

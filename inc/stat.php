@@ -30,7 +30,7 @@ function stat_update_batch(){
 
 
     #update pincode table
-    $q = 'select distinct pincode from post_box';
+    $q = 'select distinct pincode from post_box where pincode is not null and pincode !="" ';
     $POSTBOX_DB->sql($q);
     $db_pincode = array();
     foreach (F3::get('POSTBOX_DB->result') as $row){ 

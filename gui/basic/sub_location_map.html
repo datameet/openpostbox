@@ -17,7 +17,7 @@
 
 
 		    var marker<?=$i?> = L.marker([<?=$post_box_array['lat']?>,<?=$post_box_array['lan']?>]);
-		    marker<?=$i?>.bindPopup("<b><?=$post_box_array['caption']?> - <?=$post_box_array['pincode']?></b><br><img src='<?= $post_box_array['picture_url'] ?>' width=100px height=100px /><br><br><a href='<?= $this->get('BASE'); ?>/pb/id/<?=$post_box_array['post_id']?>'>Detailed Information</a>");
+		    marker<?=$i?>.bindPopup("<b><?= jsspecialchars($post_box_array['caption']) ?> - <?=$post_box_array['pincode']?></b><br><img src='<?= $post_box_array['picture_url'] ?>' width=100px height=100px /><br><br><a href='<?= $this->get('BASE'); ?>/pb/id/<?=$post_box_array['post_id']?>'>Detailed Information</a>");
 			group_markers.addLayer( marker<?=$i?>);
 
     <? endforeach; ?>

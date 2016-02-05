@@ -77,7 +77,7 @@ class Postbox extends F3instance {
 
 	function location() {
 		$this->set('title','Location');
-		$q = 'select * from post_box, pin_code where post_box.pincode = pin_code.pincode and post_box.loc = 1 order by pin_code.pincode ';
+		$q = 'select * from post_box, pin_code where post_box.pincode = pin_code.pincode and post_box.loc = 1 and lat != "" order by pin_code.pincode ';
 		$this->set('notes','Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds.');
 		$this->set('caption','Cluster view');
 
@@ -131,7 +131,7 @@ class Postbox extends F3instance {
 	function postboxMapByPincode() {
 		$pincode = $this->get('PARAMS["pincode"]');
 		$this->set('title','Pincode - '.$pincode);
-		$q = 'select * from post_box where pincode=:pincode';
+		$q = 'select * from post_box where pincode=:pincode and lat != "" ';
 		$POSTBOX_DB=F3::get('POSTBOX_DB');
 		$POSTBOX_DB->exec($q, array(":pincode"=>$pincode));
 		$array_all_postboxes = array();

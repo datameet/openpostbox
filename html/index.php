@@ -1,12 +1,12 @@
 <?php
 date_default_timezone_set('Asia/Calcutta');
-$app=require __DIR__.'/lib/base.php';
-require __DIR__.'/utils/front_end.php';
-$app->set('AUTOLOAD','inc/;inc/temp/');
+$app=require __DIR__.'/../lib/base.php';
+require __DIR__.'/../utils/front_end.php';
+$app->set('AUTOLOAD','../inc/;..inc/temp/');
 $DEBUG_PROD=0;
 $DEBUG_TEST=4;
 
-$app->set('GUI','gui/');
+$app->set('GUI',__DIR__.'/../gui/');
 $app->set('DEBUG',$DEBUG_PROD);
 $app->set('top_menu',
 	array(
@@ -24,7 +24,7 @@ $app->set('side_menu',
 	)
 );
 
-$DB ='sqlite:../postbox.sqlite';
+$DB ='sqlite:../db/postbox.sqlite';
 
 $app->set('POSTBOX_DB',new DB($DB));
 $app->set('APP_LEVEL_SECRET_TOKEN','SECRET_TOEKN_PASSWORD_CHANGE');

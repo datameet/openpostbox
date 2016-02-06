@@ -6,21 +6,21 @@
   <meta name="keywords" content="Postbox, Open Postbox, IndiaPost, Post, Philately ">
   <meta name="author" content="Thejesh GN">
 
-	<link rel="icon" href="<?= $this->get('BASE'); ?>/gui/img/postal.png" />
-	<link rel="shortcut icon" href="<?= $this->get('BASE'); ?>/gui/img/postal.png" />
+	<link rel="icon" href="<?= $this->get('BASE'); ?>/static/img/postal.png" />
+	<link rel="shortcut icon" href="<?= $this->get('BASE'); ?>/static/img/postal.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="<?= $this->get('BASE'); ?>/gui/bootstrap/css/bootstrap_spacelab.css" rel="stylesheet">
-	<link href="<?= $this->get('BASE'); ?>/gui/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="<?= $this->get('BASE'); ?>/static/bootstrap/css/bootstrap_spacelab.css" rel="stylesheet">
+	<link href="<?= $this->get('BASE'); ?>/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
  <!--[if lte IE 8]>
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
  <![endif]-->
 <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
 
-<link rel="stylesheet" href="<?= $this->get('BASE'); ?>/gui/mapcluster/MarkerCluster.css" />
-<link rel="stylesheet" href="<?= $this->get('BASE'); ?>/gui/mapcluster/MarkerCluster.Default.css" />
-<!--[if lte IE 8]><link rel="stylesheet" href="<?= $this->get('BASE'); ?>/gui/mapcluster/MarkerCluster.Default.ie.css" /><![endif]-->
-<script src="<?= $this->get('BASE'); ?>/gui/mapcluster/leaflet.markercluster-src.js"></script>
+<link rel="stylesheet" href="<?= $this->get('BASE'); ?>/static/mapcluster/MarkerCluster.css" />
+<link rel="stylesheet" href="<?= $this->get('BASE'); ?>/static/mapcluster/MarkerCluster.Default.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="<?= $this->get('BASE'); ?>/static/mapcluster/MarkerCluster.Default.ie.css" /><![endif]-->
+<script src="<?= $this->get('BASE'); ?>/static/mapcluster/leaflet.markercluster-src.js"></script>
 
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
@@ -132,7 +132,7 @@
       <footer class="footer">
         <p class="pull-left">Version: <a href="https://github.com/datameet/openpostbox/">v0.1</a> &bull; Page generated in <?= sprintf('%.3f',microtime(TRUE)-$this->get('timer')); ?> secs &bull; Memory consumed <?= sprintf('%.3f',memory_get_peak_usage()/1e6); ?> Mbytes</p>
 
-        <p class="pull-right"><a href="http://thejeshgn.com"><img src="<?= $this->get('BASE'); ?>/gui/img/thejeshgn_icon.png" width="20px"/>&nbsp;Thejesh GN</a></p>
+        <p class="pull-right"><a href="http://thejeshgn.com"><img src="<?= $this->get('BASE'); ?>/static/img/thejeshgn_icon.png" width="20px"/>&nbsp;Thejesh GN</a></p>
       </footer>
 
   </div><!-- /container -->

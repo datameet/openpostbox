@@ -1,166 +1,199 @@
 <?php
 
-/**
-	Unicode-aware string functions for the PHP Fat-Free Framework
+/*
 
-	The contents of this file are subject to the terms of the GNU General
-	License Version 3.0. You may not use this file except in
-	compliance with the license. Any of the license terms and conditions
-	can be waived if you get permission from the copyright holder.
+	Copyright (c) 2009-2015 F3::Factory/Bong Cosca, All rights reserved.
 
-	Copyright (c) 2009-2012 F3::Factory
-	Bong Cosca <bong.cosca@yahoo.com>
+	This file is part of the Fat-Free Framework (http://fatfreeframework.com).
 
-		@package Unicode
-		@version 2.0.13
-**/
+	This is free software: you can redistribute it and/or modify it under the
+	terms of the GNU General Public License as published by the Free Software
+	Foundation, either version 3 of the License, or later.
 
-//! Unicode-aware string functions
-class UTF extends Base {
+	Fat-Free Framework is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+	General Public License for more details.
 
-	/*
-		IMPORTANT: All string arguments of methods in this class must be
-		encoded in UTF-8 to function properly
-	*/
+	You should have received a copy of the GNU General Public License along
+	with Fat-Free Framework.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+//! Unicode string manager
+class UTF extends Prefab {
 
 	/**
-		Find position of first occurrence of a string (case-insensitive)
-			@return mixed
-			@param $stack string
-			@param $needle string
-			@param $ofs int
-			@public
+	*	Get string length
+	*	@return int
+	*	@param $str string
 	**/
-	static function stripos($stack,$needle,$ofs=0) {
-		return self::strpos($stack,$needle,$ofs,TRUE);
+	function strlen($str) {
+		preg_match_all('/./us',$str,$parts);
+		return count($parts[0]);
 	}
 
 	/**
-		Get string length
-			@return int
-			@param $str string
-			@public
+	*	Reverse a string
+	*	@return string
+	*	@param $str string
 	**/
-	static function strlen($str) {
-		preg_match_all('/./us',$str,$matches);
-		return count($matches[0]);
+	function strrev($str) {
+		preg_match_all('/./us',$str,$parts);
+		return implode('',array_reverse($parts[0]));
 	}
 
 	/**
-		Find position of first occurrence of a string
-			@return mixed
-			@param $stack string
-			@param $needle string
-			@param $ofs int
-			@param $case boolean
-			@public
+	*	Find position of first occurrence of a string (case-insensitive)
+	*	@return int|FALSE
+	*	@param $stack string
+	*	@param $needle string
+	*	@param $ofs int
 	**/
-	static function strpos($stack,$needle,$ofs=0,$case=FALSE) {
-		preg_match('/^(.*?)'.preg_quote($needle,'/').'/'.($case?'i':'').'us',
-			self::substr($stack,$ofs),$match);
-		return isset($match[1])?self::strlen($match[1]):FALSE;
+	function stripos($stack,$needle,$ofs=0) {
+		return $this->strpos($stack,$needle,$ofs,TRUE);
 	}
 
 	/**
-		Finds position of last occurrence of a string (case-insensitive)
-			@return mixed
-			@param $stack string
-			@param $needle string
-			@param $ofs int
-			@public
+	*	Find position of first occurrence of a string
+	*	@return int|FALSE
+	*	@param $stack string
+	*	@param $needle string
+	*	@param $ofs int
+	*	@param $case bool
 	**/
-	static function strripos($stack,$needle,$ofs=0) {
-		return self::strrpos($stack,$needle,$ofs,TRUE);
+	function strpos($stack,$needle,$ofs=0,$case=FALSE) {
+		return preg_match('/^(.{'.$ofs.'}.*?)'.
+			preg_quote($needle,'/').'/us'.($case?'i':''),$stack,$match)?
+			$this->strlen($match[1]):FALSE;
 	}
 
 	/**
-		Find position of last occurrence of a string
-			@return mixed
-			@param $stack string
-			@param $needle string
-			@param $ofs int
-			@param $case boolean
-			@public
+	*	Returns part of haystack string from the first occurrence of
+	*	needle to the end of haystack (case-insensitive)
+	*	@return string|FALSE
+	*	@param $stack string
+	*	@param $needle string
+	*	@param $before bool
 	**/
-	static function strrpos($stack,$needle,$ofs=0,$case=FALSE) {
+	function stristr($stack,$needle,$before=FALSE) {
+		return $this->strstr($stack,$needle,$before,TRUE);
+	}
+
+	/**
+	*	Returns part of haystack string from the first occurrence of
+	*	needle to the end of haystack
+	*	@return string|FALSE
+	*	@param $stack string
+	*	@param $needle string
+	*	@param $before bool
+	*	@param $case bool
+	**/
+	function strstr($stack,$needle,$before=FALSE,$case=FALSE) {
 		if (!$needle)
 			return FALSE;
-		$len=self::strlen($stack);
-		$ptr=$ofs;
-		while ($ptr<$len) {
-			$sub=self::substr($stack,$ptr);
-			if (!$sub || !preg_match('/^(.*?)'.
-				preg_quote($needle,'/').'/'.($case?'i':'').'us',$sub,$match))
-				break;
-			$ofs=$ptr+self::strlen($match[1]);
-			$ptr+=self::strlen($match[0]);
-		}
-		return $sub?$ofs:FALSE;
-	}
-
-	/**
-		Returns part of haystack string from the first occurrence of
-		needle to the end of haystack (case-insensitive)
-			@return mixed
-			@param $stack string
-			@param $needle string
-			@param $before boolean
-			@public
-	**/
-	static function stristr($stack,$needle,$before=FALSE) {
-		return strstr($stack,$needle,$before,TRUE);
-	}
-
-	/**
-		Returns part of haystack string from the first occurrence of
-		needle to the end of haystack
-			@return mixed
-			@param $stack string
-			@param $needle string
-			@param $before boolean
-			@param $case boolean
-			@public
-	**/
-	static function strstr($stack,$needle,$before=FALSE,$case=FALSE) {
-		if (!$needle)
-			return FALSE;
-		preg_match('/^(.*?)'.preg_quote($needle,'/').'/'.($case?'i':'').'us',
+		preg_match('/^(.*?)'.preg_quote($needle,'/').'/us'.($case?'i':''),
 			$stack,$match);
 		return isset($match[1])?
-			($before?$match[1]:self::substr($stack,self::strlen($match[1]))):
+			($before?
+				$match[1]:
+				$this->substr($stack,$this->strlen($match[1]))):
 			FALSE;
 	}
 
 	/**
-		Return part of a string
-			@return mixed
-			@param $str string
-			@param $start int
-			@param $len int
-			@public
+	*	Return part of a string
+	*	@return string|FALSE
+	*	@param $str string
+	*	@param $start int
+	*	@param $len int
 	**/
-	static function substr($str,$start,$len=0) {
-		if ($start<0) {
-			$len=-$start;
-			$start=self::strlen($str)+$start;
-		}
+	function substr($str,$start,$len=0) {
+		if ($start<0)
+			$start=$this->strlen($str)+$start;
 		if (!$len)
-			$len=self::strlen($str)-$start;
+			$len=$this->strlen($str)-$start;
 		return preg_match('/^.{'.$start.'}(.{0,'.$len.'})/us',$str,$match)?
 			$match[1]:FALSE;
 	}
 
 	/**
-		Count the number of substring occurrences
-			@return int
-			@param $stack string
-			@param $needle string
-			@public
+	*	Count the number of substring occurrences
+	*	@return int
+	*	@param $stack string
+	*	@param $needle string
 	**/
-	static function substr_count($stack,$needle) {
+	function substr_count($stack,$needle) {
 		preg_match_all('/'.preg_quote($needle,'/').'/us',$stack,
 			$matches,PREG_SET_ORDER);
 		return count($matches);
+	}
+
+	/**
+	*	Strip whitespaces from the beginning of a string
+	*	@return string
+	*	@param $str string
+	**/
+	function ltrim($str) {
+		return preg_replace('/^[\pZ\pC]+/u','',$str);
+	}
+
+	/**
+	*	Strip whitespaces from the end of a string
+	*	@return string
+	*	@param $str string
+	**/
+	function rtrim($str) {
+		return preg_replace('/[\pZ\pC]+$/u','',$str);
+	}
+
+	/**
+	*	Strip whitespaces from the beginning and end of a string
+	*	@return string
+	*	@param $str string
+	**/
+	function trim($str) {
+		return preg_replace('/^[\pZ\pC]+|[\pZ\pC]+$/u','',$str);
+	}
+
+	/**
+	*	Return UTF-8 byte order mark
+	*	@return string
+	**/
+	function bom() {
+		return chr(0xef).chr(0xbb).chr(0xbf);
+	}
+
+	/**
+	*	Convert code points to Unicode symbols
+	*	@return string
+	*	@param $str string
+	**/
+	function translate($str) {
+		return html_entity_decode(
+			preg_replace('/\\\\u([[:xdigit:]]+)/i','&#x\1;',$str));
+	}
+
+	/**
+	*	Translate emoji tokens to Unicode font-supported symbols
+	*	@return string
+	*	@param $str string
+	**/
+	function emojify($str) {
+		$map=array(
+			':('=>'\u2639', // frown
+			':)'=>'\u263a', // smile
+			'<3'=>'\u2665', // heart
+			':D'=>'\u1f603', // grin
+			'XD'=>'\u1f606', // laugh
+			';)'=>'\u1f609', // wink
+			':P'=>'\u1f60b', // tongue
+			':,'=>'\u1f60f', // think
+			':/'=>'\u1f623', // skeptic
+			'8O'=>'\u1f632', // oops
+		)+Base::instance()->get('EMOJI');
+		return $this->translate(str_replace(array_keys($map),
+			array_values($map),$str));
 	}
 
 }

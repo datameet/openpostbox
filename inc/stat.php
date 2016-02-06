@@ -1,4 +1,5 @@
 <?php
+/*
 class STAT extends F3instance {
 
 function stat_update_batch(){
@@ -103,4 +104,5 @@ function stat_update_batch(){
 }
 
 }
+*/
 ?>

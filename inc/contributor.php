@@ -1,4 +1,5 @@
 <?php
+/*
 class Contributor extends F3instance {
     function listContributors() {
         $q = 'SELECT distinct username, count(*) as post_box_count FROM post_box group by username';
@@ -40,15 +41,7 @@ class Contributor extends F3instance {
             $array_all_postboxes[$row["post_id"]]   = $single_postbox;
         }
 
-/*        $q = 'select * from pin_code where pincode=:pincode';
-        $POSTBOX_DB=F3::get('POSTBOX_DB');
-        $POSTBOX_DB->exec($q, array(":pincode"=>$pincode));
-        foreach (F3::get('POSTBOX_DB->result') as $row1){
-            $this->set('center_lat',$row1['center_lat']);
-            $this->set('center_lan',$row1['center_long']);
-            $this->set('caption',$row1['total_post_boxes'].' postboxe(s) in this pincode area. Check <a href="'.$this->get('BASE').'/pb/pincode/map/'.$pincode.'/">Map</a> view.');
-        }
-*/
+
         $this->set('caption','Post boxes by our contributor -'.$username); 
         $this->set('array_all_postboxes',$array_all_postboxes);
         $this->set('sub','sub_by_username.html');
@@ -59,5 +52,5 @@ class Contributor extends F3instance {
  
     }
 
-}
+}*/
 ?>

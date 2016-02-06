@@ -1,4 +1,5 @@
 <?php
+/*
 class Location extends F3instance {
 
 	function locationListStates() {
@@ -51,4 +52,5 @@ class Location extends F3instance {
 
 
 }
+*/
 ?>

@@ -1,4 +1,5 @@
 <?php
+/*
 class GIS extends F3instance {
 
 function reverse_geocode_batch(){
@@ -64,5 +65,5 @@ function reverse_geocode_batch(){
 	echo $this->render('basic/main.html');
 }
 
-}
+} */
 ?>

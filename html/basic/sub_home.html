@@ -1,0 +1,22 @@
+<repeat group="{{ @array_all_postboxes }}" value="{{ @post_box_array }}" counter="{{ @ctr }}">
+    <check if="@ctr==1 or @ctr==10">
+        <true>
+            <div class="span4">
+                <a   href="{{@BASE}}/pb/id/{{@post_box_array['post_id']}}">
+                    <img title="{{@post_box_array['caption']}}" alt="{{@post_box_array['caption']}}" src="{{@post_box_array['picture_url'] }}" />    
+                </a>
+            </div>
+        </true>
+        <false>
+            <div class="span2">
+                <a   href="{{@BASE}}/pb/id/{{@post_box_array['post_id']}}">
+                    <img title="{{@post_box_array['caption']}}" alt="{{@post_box_array['caption']}}" src="{{@post_box_array['picture_url'] }}" />    
+                </a>
+                <br>&nbsp;
+            </div>
+        </false>
+    </check>
+</repeat>
+
+
+

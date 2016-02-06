@@ -1,4 +1,5 @@
 <?php
+/*
 class Postbox extends F3instance {
 	function postboxById() {
 		$id = $this->get('PARAMS["id"]');
@@ -210,4 +211,5 @@ class Postbox extends F3instance {
 		echo $this->render('basic/main.html');
 	}
 }
+*/
 ?>

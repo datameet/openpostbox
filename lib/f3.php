@@ -20,48 +20,23 @@
 
 */
 
-//! Custom logger
-class Log {
+//! Legacy mode enabler
+class F3 {
 
-	protected
-		//! File name
-		$file;
-
-	/**
-	*	Write specified text to log file
-	*	@return string
-	*	@param $text string
-	*	@param $format string
-	**/
-	function write($text,$format='r') {
-		$fw=Base::instance();
-		$fw->write(
-			$this->file,
-			date($format).
-				(isset($_SERVER['REMOTE_ADDR'])?
-					(' ['.$_SERVER['REMOTE_ADDR'].']'):'').' '.
-			trim($text).PHP_EOL,
-			TRUE
-		);
-	}
+	static
+		//! Framework instance
+		$fw;
 
 	/**
-	*	Erase log
-	*	@return NULL
+	*	Forward function calls to framework
+	*	@return mixed
+	*	@param $func callback
+	*	@param $args array
 	**/
-	function erase() {
-		@unlink($this->file);
-	}
-
-	/**
-	*	Instantiate class
-	*	@param $file string
-	**/
-	function __construct($file) {
-		$fw=Base::instance();
-		if (!is_dir($dir=$fw->get('LOGS')))
-			mkdir($dir,Base::MODE,TRUE);
-		$this->file=$dir.$file;
+	static function __callstatic($func,array $args) {
+		if (!self::$fw)
+			self::$fw=Base::instance();
+		return call_user_func_array(array(self::$fw,$func),$args);
 	}
 
 }

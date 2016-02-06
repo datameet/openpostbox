@@ -1,4 +1,5 @@
 <?php
+/*
 class InstagramService extends F3instance {
 
 function startswith4($haystack, $needle) {
@@ -102,5 +103,6 @@ function pull_images(){
 }
 
 
-}//calss end
+}//calss end 
+*/
 ?>

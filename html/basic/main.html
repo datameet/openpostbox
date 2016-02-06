@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{@title}}</title>
+  <meta name="description" content="Open Postbox is a crowsourced, geotagged post boxes across India.">
+  <meta name="keywords" content="Postbox, Open Postbox, IndiaPost, Post, Philately ">
+  <meta name="author" content="{{@AUTHOR}}">
+
+	<link rel="icon" href="/static/img/postal.png" />
+	<link rel="shortcut icon" href="/static/img/postal.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/static/bootstrap/css/bootstrap_ubuntu.css" rel="stylesheet">
+	<link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+ <!--[if lte IE 8]>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+ <![endif]-->
+<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+
+<link rel="stylesheet" href="/static/mapcluster/MarkerCluster.css" />
+<link rel="stylesheet" href="/static/mapcluster/MarkerCluster.Default.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="/static/mapcluster/MarkerCluster.Default.ie.css" /><![endif]-->
+<script src="/static/mapcluster/leaflet.markercluster-src.js"></script>
+</head>
+<body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
+
+
+
+  <!-- Navbar
+    ================================================== -->
+  <div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container" style="width: auto;">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">Open Postbox</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <repeat group="{{ @top_menu }}" key="{{ @key }}" value="{{ @value }}">
+              <check if="{{ @title==@value }}">
+                <true>
+                    <li class="active"><a href="{{@BASE}}/{{@key}}">{{@value}}</a></li>
+                </true>
+                <false>
+                    <li><a href="{{@BASE}}/{{@key}}">{{@value}}</a></li>
+                </false>
+              </check>
+            </repeat>
+          </ul>
+          <form class="navbar-search pull-right" method="get" action="{{@BASE}}/pb/search/">
+            <input type="text" class="search-query span2" name="pincode" placeholder="Pincode">
+          </form>
+        </div><!-- /.nav-collapse -->
+      </div>
+    </div><!-- /navbar-inner -->
+  </div><!-- /navbar -->
+
+
+
+    <div class="container">
+
+
+<!-- Masthead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="row">
+    <div class="span6">
+      <h2>{{@title}}</h2>
+      <p class="lead">{{@caption}}</p>
+    </div>
+    <div class="span6">
+      <check if="{{ @$is_home }}">
+        <div class="well">
+          <true>
+              {{@post_count}} postboxes submitted by {{@user_count}} users.
+          </true>
+          <false>
+            <check if="{{ @notes }}">
+                <true>
+                {{@notes}}
+                </true>
+            </check>
+          </false>
+        </div>
+      </check>
+  </div>
+</header>
+
+
+<!-- main section
+================================================== -->
+<section id="main_section" style="height:700px;">
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span2">
+      <div class="well">
+        <h3>PostBoxes</h3>
+        <h4><a href="/pb/location/map">On Map</a></h4>
+        <h4><a href="/pb/location/list/states">By States</a></h4>
+        <h4><a href="/pb/list/pincode">By Pincode</a></h4>
+        <h4><a href="/pb/contributor/list">By Contributer</a></h4>
+      </div>
+      <div class="well">
+        Open Postbox is a list of crowsourced, geotagged post boxes across India.
+      </div>
+    </div>
+
+    <div class="span10">
+          {{@sub_out_put | raw }}
+    </div>
+
+  </div>
+
+</section>
+    <br>
+     <!-- Footer
+      ================================================== -->
+      <footer class="footer">
+        <p class="pull-left">Version: <a href="https://github.com/datameet/openpostbox/">v0.1</a></p>
+
+        <p class="pull-right"><a href="http://thejeshgn.com"><img src="/static/img/thejeshgn_icon.png" width="20px"/>&nbsp;Thejesh GN</a></p>
+      </footer>
+  </div><!-- /container -->	
+</body>
+</html>

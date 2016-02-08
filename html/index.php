@@ -44,11 +44,11 @@ $app->route('GET /pincode/list','Postbox->pincode');
 $app->route('GET /pincode/@pincode','Postbox->postboxListByPincode');
 $app->route('GET /pincode/@pincode/@type','Postbox->postboxListByPincode');
 
+$app->route('GET /location/list/states','Location->locationListStates');
+$app->route('GET /location/list/districts/@state','Location->districtsListByState');
+
+
 /*
-
-
-$app->route('GET /pb/location/list/states','Location->locationListStates');
-$app->route('GET /pb/location/list/districts/@state','Location->districtsListByState');
 
 $app->route('GET /pb/contributor/list','Contributor->listContributors');
 $app->route('GET /pb/contributor/name/@username','Contributor->listPostBoxByUsername');

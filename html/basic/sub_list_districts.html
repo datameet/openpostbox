@@ -1,3 +1,7 @@
+    <exclude>
+    <p>A chunk of HTML we don't want displayed at the moment</p>
+    </exclude>
+
     <table class="table table-hover">
     <thead>
     	<tr>
@@ -5,26 +9,32 @@
     		<th> Pincodes </th>
     	</tr>
     </thead>
-    <tbody>
-
-    <? $preiousvDistrict = 'init'; ?>
-    <? $presentDistrict = 'init'; ?>
-    <? foreach ($this->get('array_all_districts') as $district=>$district_array): ?>
-            <? $presentDistrict = $district_array['district']; ?>
-          	<? if ( $presentDistrict != $preiousvDistrict ): ?>
-            <tr>
-    		<td><?=$district_array['district'];?> </td>
-            <td>
-            <? endif; ?>
-            <? $preiousvDistrict = $presentDistrict; ?> 
-    		 <a href="<?= $this->get('BASE'); ?>/pb/pincode/<?=$district_array['pincode']?>" ><?= $district_array['pincode']; ?></a> (<?=$district_array['post_box_count']?>),
+    <tbody>    
+    <repeat group="{{ @array_all_districts }}" value="{{ @district_array }}" >
+            <!--
+            {{  @presentDistrict = @district_array['district'] }}
+            -->
+          	<check if="{{@presentDistrict != @preiousvDistrict}}">
+            <true>
+                <tr>
+    		          <td>{{@district_array['district']}}</td>
+                <td>
+            </true>
+            </check>
+            <!--
+            {{ @preiousvDistrict = @presentDistrict }}
+    		-->
+            <a href="{{@BASE}}/pincode/{{@district_array['pincode']}}" >
+                {{@district_array['pincode']}}</a> ({{@district_array['post_box_count']}}),
             
-            <? if ( $presentDistrict != $preiousvDistrict ): ?>
-            </td>
-            </tr>
-            <? endif; ?>
+            <check if="{{@presentDistrict != @preiousvDistrict}}">
+                <true>
+                    </td>
+                    </tr>
+                </true>
+            </check>
             
+    </repeat>
 
-    <? endforeach; ?>
      </tbody>
 </table>

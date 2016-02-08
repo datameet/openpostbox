@@ -34,7 +34,6 @@ class Main extends BaseController {
         }
 		$out=Template::instance()->render('basic/sub_home.html');
 		$this->view->set('sub_out_put',$out);
-		$this->view->set('LANGUAGE','en-US');		
         $this->view->set('enable_maps',1);
         echo Template::instance()->render('basic/main.html');
 	}

@@ -5,12 +5,12 @@
     		<th> No of Postboxes </th>
     	</tr>
     </thead>
-    <? foreach ($this->get('array_all_states') as $state=>$state_array): ?>
     <tbody>
+            <repeat group="{{ @array_all_states }}" value="{{ @state_array }}" >
           	<tr>
-    		<td> <a href='<?= $this->get('BASE'); ?>/pb/location/list/districts/<?=$state_array['state']?>'><?=$state_array['state']?></a> </td>
-    		<td> <?=$state_array['post_box_count']?> </td>
+    		<td> <a href="{{@BASE}}/location/list/districts/{{@state_array['state']}}">{{@state_array['state']}}</a> </td>
+    		<td> {{@state_array['post_box_count']}}</td>
     		</tr>
+            </repeat>
      </tbody>
-    <? endforeach; ?>
 </table>

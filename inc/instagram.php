@@ -1,13 +1,10 @@
 <?php
-/*
-class InstagramService extends F3instance {
 
-function startswith4($haystack, $needle) {
-    return strpos($haystack, $needle) === 0;
-}
+class Instagram extends BaseController {
+
 
 function pull_data(){
-	$this->set('title','PostBox - Instagram Data Pull');
+	$this->view->set('title','PostBox - Instagram Data Pull');
 	$instagram_api_clinet_id = 'b9d4b604105648168c671293d10cc67e';
 	$instagram_api_url = 'https://api.instagram.com/v1/tags/openpostboxindia/media/recent?client_id='.$instagram_api_clinet_id;
 	$data_pull_messages = array();
@@ -42,11 +39,11 @@ function pull_data(){
 			//check if post_id exists, if yes then go to next one. else insert
 			$data_pull_messages[] = "Processing the post_id=".$post_id;
 			$q = 'select count(*) as count_posts from post_box where post_id="'.$post_id.'"';
-			$POSTBOX_DB=F3::get('POSTBOX_DB');
-			$POSTBOX_DB->sql($q);
+			$POSTBOX_DB=\F3::get('POSTBOX_DB');
+			$result = $POSTBOX_DB->exec($q);
 			//print '\n'.$q; 
 			$count_posts = 0;
-			foreach (F3::get('POSTBOX_DB->result') as $row){
+			foreach ($result as $row){
 	        	$count_posts = $row['count_posts'];
 
 	        }
@@ -54,22 +51,26 @@ function pull_data(){
 	        	$data_pull_messages[] = "Lets INSERT.";
 	        	$i = 'insert into post_box( post_id , picture_url , tags , lat , lan , created_time , username , website,pincode, caption, provider) values('.'"'.$post_id .'","'.$picture_url .'","'.$tags .'","'.$lat .'","'.$lan .'","'.$created_time .'","'.$username .'","'.$website .'","'.$pincode .'","'.$caption .'"'.',"Instagram")';
 	        	//print $i;
-	        	$POSTBOX_DB->sql($i);
+	        	$POSTBOX_DB->exec($i);
 	        }else{
 	        	$data_pull_messages[] =  "Already exists.";
 	        }
 
 		}
 	}
-	$this->set('LANGUAGE','en-US');
-	$this->set('sub','sub_data_pull.html');
-	$this->set('data_pull_messages',$data_pull_messages);
-	$out=$this->render('basic/layout.html');
-	$this->set('sub_out_put',$out);
-	$this->set('LANGUAGE','en-US');
-	echo $this->render('basic/main.html');
+
+	$this->view->set('data_pull_messages',$data_pull_messages);
+    $out=Template::instance()->render('basic/sub_data_pull.html');
+    $this->view->set('sub_out_put',$out);
+    echo Template::instance()->render('basic/main.html');
 }
 
+function startswith4($haystack, $needle) {
+    return strpos($haystack, $needle) === 0;
+}
+
+
+/*
 function pull_images(){
 	$this->set('title','PostBox - Instagram Pull Pictures');
 	$data_pull_messages = array();
@@ -101,8 +102,7 @@ function pull_images(){
 	$this->set('LANGUAGE','en-US');
 	echo $this->render('basic/main.html');
 }
-
-
-}//calss end 
 */
+
+}//class end 
 ?>

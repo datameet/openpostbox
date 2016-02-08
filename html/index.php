@@ -52,17 +52,14 @@ $app->route('GET /contributor/username/@username','Contributor->listPostBoxByUse
 
 $app->route('GET /batch/instagram_data_pull','Instagram->pull_data');
 $app->route('GET /batch/reverse_geocode_batch','GIS->reverse_geocode_batch');
+$app->route('GET /batch/stat_update_batch','STAT->stat_update_batch');
 
-/*
 
-$app->route('GET /twitter_data_pull_batch','TwitterService->pull_data');
-
-$app->route('GET /stat_update_batch','STAT->stat_update_batch');*/
+//$app->route('GET /twitter_data_pull_batch','TwitterService->pull_data');
 //$app->route('GET /user/login','USERS->login');
 //$app->route('POST /user/token','USERS->login_token');
 //$app->route('POST /user/access/@token','USERS->login_access');
 //$app->route('POST /user/logout','USERS->logout');
-
 //as of not required. I dont want to increase db size on my server.
 //$app->route('GET /image_pull','Instagram->pull_images');
 

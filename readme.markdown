@@ -5,7 +5,9 @@ This is the actual application which end use can use for searching the postboxes
 ## Install and run
 `
  git clone https://github.com/datameet/openpostbox openpostbox
+
  cd openpostbox/html
+ 
  php -S localhost:8080
 `
 

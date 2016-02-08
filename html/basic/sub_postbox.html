@@ -1,31 +1,22 @@
 <div class="span4">
-    <?php 
-        if($this->get('img')){ 
-    ?>
-        <img src="data:jpg;base64,<?= $this->get('img') ?>" />
-    <?php
-        }else{ 
-    ?>
-        <img src="<?= $this->get('picture_url') ?>" />    
-    <?php
-        }
-    ?>
+    <check if="{{@img}}">
+    <true>
+        <img src="data:jpg;base64,{{@img}} ?>" />
+    </true>
+    <false>
+        <img src="{{@picture_url}}" />    
+    </false>
+    </check>
 </div>
 <div class="span4">
-	<img src="<?= $this->get('map') ?>"/>
+	<img src="{{@map}}"/>
 		<br><br>
-        <?php
-            $lat = $this->get('lat');
-            $lan = $this->get('lan');
-        ?>
-
-		<!--<b>Geo:</b><a href="<?= $this->get('BASE'); ?>/pb/location/<?= $this->get('lat');?>/<?= $this->get('lan');?>" ><?= $this->get('lat') ?>,<?= $this->get('lan') ?></a><br>-->
-		<b>Geo:</b><?=$lat  ?>,<?= $lan ?>&nbsp;(<a target="_new" href="http://www.openstreetmap.org/index.html?mlat=<?=$lat  ?>&mlon=<?=$lan  ?>&zoom=15&layers=B000FTF">OSM</a>,&nbsp;<a target="_new" href="http://maps.google.com/maps?ll=<?=$lat  ?>,<?=$lan ?>&spn=0.1,0.1&t=m&q=<?=$lat  ?>,<?=$lan  ?>">GM</a>)<br>
+		<b>Geo:</b>{{@lat}},{{@lan}}&nbsp;(<a target="_new" href="http://www.openstreetmap.org/index.html?mlat={{@lat}}&mlon={{@lan}}&zoom=15&layers=B000FTF">OSM</a>,&nbsp;<a target="_new" href="http://maps.google.com/maps?ll={{@lat}},{{@lan}}&spn=0.1,0.1&t=m&q={{@lat}},{{@lan}}">GM</a>)<br>
         
 
 
-        <b>Address:</b> <?= $this->get('formatted_address') ?><br>
-		<b>Pincode:</b> <a href="<?= $this->get('BASE'); ?>/pb/pincode/<?= $this->get('pincode');?>" ><?= $this->get('pincode') ?></a><br>
-		<b>Tags :</b> <?= $this->get('tags') ?><br>
-		<b>Credit:</b> <?= $this->get('username'); ?>&nbsp;(<a href="<?= $this->get('website') ?>">Blog</a>) on <?= date('Y-m-d H:i:s',$this->get('created_time')); ?>
+        <b>Address:</b> {{@formatted_address}}<br>
+		<b>Pincode:</b> <a href="{{@BASE}}/pb/pincode/{{@pincode}}" >{{@pincode}}</a><br>
+		<b>Tags :</b> {{@tags}}<br>
+		<b>By:</b> {{@username}}&nbsp;</br>
 </div>

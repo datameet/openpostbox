@@ -24,7 +24,7 @@ class Location extends BaseController {
 
 	function districtsListByState() {
 		$state = $this->view->get('PARAMS["state"]');
-		$this->view->set('title','State - '.$state);
+		$this->view->set('title','State - '.$this->view->scrub($state));
 		$q = 'SELECT distinct district, pincode, count(*) as post_box_count FROM post_box where state=:state group by district, pincode order by district';
 		$POSTBOX_DB=\F3::get('POSTBOX_DB');
 		$result = $POSTBOX_DB->exec($q, array(":state"=>$state));
@@ -37,7 +37,7 @@ class Location extends BaseController {
 			$array_all_districts[$row["district"].$row["pincode"]]	= $single_postbox;
         }
 
-		$this->view->set('caption','Disctricts in '.$state.' for which we have postboxes.');		
+		$this->view->set('caption','Disctricts in '.$this->view->scrub($state).' for which we have postboxes.');		
         $this->view->set('array_all_districts',$array_all_districts);
         $out=Template::instance()->render('basic/sub_list_districts.html');
 		$this->view->set('sub_out_put',$out);

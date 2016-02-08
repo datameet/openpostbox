@@ -5,12 +5,19 @@
     		<th> Address </th>
     	</tr>
     </thead>
-    <? foreach ($this->get('array_all_postboxes') as $post_box=>$post_box_array): ?>
+
     <tbody>
+        <repeat group="{{ @array_all_postboxes }}" value="{{ @post_box_array }}" >
           	<tr>
-    		<td> <a href='<?= $this->get('BASE'); ?>/pb/id/<?=$post_box_array['post_id']?>'><?=$post_box_array['caption']?></a> </td>
-    		<td> <?=$post_box_array['formatted_address']?> </td>
+    		<td> 
+                <a href='{{@BASE}}/pb/id/{{@post_box_array['post_id']}}'>
+                {{@post_box_array['caption']}}
+                </a> 
+            </td>
+    		<td> 
+                {{@post_box_array['formatted_address']}} 
+            </td>
     		</tr>
+        </repeat>
      </tbody>
-    <? endforeach; ?>
 </table>

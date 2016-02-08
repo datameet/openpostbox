@@ -160,16 +160,16 @@ class Postbox extends BaseController {
         $this->set('enable_maps',1);
 		echo $this->render('basic/main.html');	
 	}
-
+*/
 	//same as above. Just for making it future proof
 	function postboxListByPincode() {
-		$pincode = $this->get('PARAMS["pincode"]');
-		$this->set('title','Pincode - '.$pincode);
+		$pincode = $this->view->get('PARAMS["pincode"]');
+		$this->view->set('title','Pincode - '.$pincode);
 		$q = 'select * from post_box where pincode=:pincode';
-		$POSTBOX_DB=F3::get('POSTBOX_DB');
-		$POSTBOX_DB->exec($q, array(":pincode"=>$pincode));
+		$POSTBOX_DB=\F3::get('POSTBOX_DB');
+		$result= $POSTBOX_DB->exec($q, array(":pincode"=>$pincode));
 		$array_all_postboxes = array();
-		foreach (F3::get('POSTBOX_DB->result') as $row){
+		foreach ($result as $row){
 			$single_postbox = array();
 			$single_postbox['post_id']=	$row["post_id"];	
 			$single_postbox['lat']=	$row["lat"];
@@ -181,24 +181,22 @@ class Postbox extends BaseController {
         }
 
 		$q = 'select * from pin_code where pincode=:pincode';
-		$POSTBOX_DB=F3::get('POSTBOX_DB');
-		$POSTBOX_DB->exec($q, array(":pincode"=>$pincode));
-		foreach (F3::get('POSTBOX_DB->result') as $row1){
-			$this->set('center_lat',$row1['center_lat']);
-			$this->set('center_lan',$row1['center_long']);
-			$this->set('caption',$row1['total_post_boxes'].' postboxe(s) in this pincode area. Check <a href="'.$this->get('BASE').'/pb/pincode/map/'.$pincode.'/">Map</a> view.');
+		$POSTBOX_DB=\F3::get('POSTBOX_DB');
+		$result=$POSTBOX_DB->exec($q, array(":pincode"=>$pincode));
+		foreach ($result as $row1){
+			$this->view->set('center_lat',$row1['center_lat']);
+			$this->view->set('center_lan',$row1['center_long']);
+			$this->view->set('caption',$row1['total_post_boxes'].' postboxe(s) in this pincode area. Check <a href="'.$this->view->get('BASE').'/pb/pincode/map/'.$pincode.'/">Map</a> view.');
         }
 
-		
-        $this->set('array_all_postboxes',$array_all_postboxes);
-        $this->set('sub','sub_by_pincode.html');
-		$out=$this->render('basic/layout.html');
-		$this->set('sub_out_put',$out);
-		$this->set('LANGUAGE','en-US');		
-		echo $this->render('basic/main.html');	
+        $this->view->set('array_all_postboxes',$array_all_postboxes);
+		$out=Template::instance()->render('basic/sub_by_pincode.html');
+		$this->view->set('sub_out_put',$out);
+		echo Template::instance()->render('basic/main.html');
+
 	}
 
-
+/*
 	function postboxByLocation() {
 		$lat = $this->get('PARAMS["lat"]');
 		$lat = $this->get('PARAMS["long"]');

@@ -51,12 +51,12 @@ $app->route('GET /contributor/list','Contributor->listContributors');
 $app->route('GET /contributor/username/@username','Contributor->listPostBoxByUsername');
 
 $app->route('GET /batch/instagram_data_pull','Instagram->pull_data');
+$app->route('GET /batch/reverse_geocode_batch','GIS->reverse_geocode_batch');
 
 /*
 
 $app->route('GET /twitter_data_pull_batch','TwitterService->pull_data');
 
-$app->route('GET /reverse_geocode_batch','GIS->reverse_geocode_batch');
 $app->route('GET /stat_update_batch','STAT->stat_update_batch');*/
 //$app->route('GET /user/login','USERS->login');
 //$app->route('POST /user/token','USERS->login_token');

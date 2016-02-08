@@ -47,11 +47,11 @@ $app->route('GET /pincode/@pincode/@type','Postbox->postboxListByPincode');
 $app->route('GET /location/list/states','Location->locationListStates');
 $app->route('GET /location/list/districts/@state','Location->districtsListByState');
 
+$app->route('GET /contributor/list','Contributor->listContributors');
+$app->route('GET /contributor/username/@username','Contributor->listPostBoxByUsername');
+
 
 /*
-
-$app->route('GET /pb/contributor/list','Contributor->listContributors');
-$app->route('GET /pb/contributor/name/@username','Contributor->listPostBoxByUsername');
 
 $app->route('GET /twitter_data_pull_batch','TwitterService->pull_data');
 $app->route('GET /instagram_data_pull_batch','InstagramService->pull_data');

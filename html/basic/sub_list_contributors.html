@@ -5,12 +5,15 @@
             <th> No of Postboxes </th>
         </tr>
     </thead>
-    <? foreach ($this->get('array_all_users') as $contributor=>$contributor_array): ?>
     <tbody>
+        <repeat group="{{ @array_all_users }}" value="{{ @contributor_array }}" >
             <tr>
-            <td> <a href='<?= $this->get('BASE'); ?>/pb/contributor/name/<?=$contributor_array['username']?>'><?=$contributor_array['username']?></a> </td>
-            <td> <?=$contributor_array['post_box_count']?> </td>
+            <td> <a href="{{@BASE}}/contributor/username/{{@contributor_array['username']}}">       {{@contributor_array['username']}}
+                </a> 
+            </td>
+            <td> {{@contributor_array['post_box_count']}} </td>
             </tr>
+        </repeat>
      </tbody>
-    <? endforeach; ?>
+
 </table>

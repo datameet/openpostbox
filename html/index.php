@@ -35,17 +35,16 @@ $app->route('GET /about','Main->about');
 $app->route('GET /contribute','Main->contribute');
 $app->route('GET /api','Main->api');
 $app->route('GET /license','Main->license');
-
+$app->route('GET /search','Postbox->search');
 
 $app->route('GET /pb/id/@id','Postbox->postboxById');
-$app->route('GET /pincode/list','Postbox->pincode');
+$app->route('GET /pb/location/map','Postbox->location');
 
+$app->route('GET /pincode/list','Postbox->pincode');
 $app->route('GET /pincode/@pincode','Postbox->postboxListByPincode');
 $app->route('GET /pincode/@pincode/@type','Postbox->postboxListByPincode');
 
 /*
-$app->route('GET /pb/search','Postbox->search');
-$app->route('GET /pb/location/map','Postbox->location');
 
 
 $app->route('GET /pb/location/list/states','Location->locationListStates');

@@ -103,32 +103,26 @@ class Postbox extends BaseController {
 		$this->set('LANGUAGE','en-US');		
 		echo $this->render('basic/main.html');	
 	}
-
+*/
 	function search() {
 		//TODO:simple search, we will improve it later
 		$pincode = $_REQUEST['pincode'];
 		if($pincode != ""){
 			//this seems to give problem in prod. so added HTTP_HOST. We might have to do in other
 			//places too
-			$url ='http://'.$_SERVER['HTTP_HOST'].$this->get('BASE').'/pb/pincode/'.$pincode;
-			$this->reroute($url);
+			$url =$this->view->get('BASE').'/pincode/'.$pincode;
+			$this->view->reroute($url, false);
 		}else{
-			$this->set('LANGUAGE','en-US');
-			$this->set('error_msg','Enter something for searching :)');
-			$this->set('sub','sub_error.html');
-			$out=$this->render('basic/layout.html');
-			$this->set('sub_out_put',$out);
-			$this->set('caption','Error');
-			$this->set('LANGUAGE','en-US');
-			echo $this->render('basic/main.html');			
+			$this->view->set('caption','Error');
+			$this->view->set('error_msg','Enter something for searching :)');
+			$out=Template::instance()->render('basic/sub_error.html');
+			$this->view->set('sub_out_put',$out);
+			echo Template::instance()->render('basic/main.html');
 		}
 	}
-*/
-	function postboxMapByPincode() {
-		echo "hello";
-	}
 
-	//same as above. Just for making it future proof
+
+
 	function postboxListByPincode() {
 		$pincode = $this->view->get('PARAMS["pincode"]');
 		$type = $this->view->get('PARAMS["type"]');
@@ -173,14 +167,6 @@ class Postbox extends BaseController {
 
 	}
 
-/*
-	function postboxByLocation() {
-		$lat = $this->get('PARAMS["lat"]');
-		$lat = $this->get('PARAMS["long"]');
-		$this->set('title','Location');
-		echo $this->render('basic/main.html');
-	}
-*/
 }
 
 ?>

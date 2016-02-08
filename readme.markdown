@@ -3,44 +3,43 @@ This is the actual application which end use can use for searching the postboxes
 
 
 ## Install and run
-
-> hg clone http://code.thejeshgn.com/postbox
-
-> cd postbox
-
-> php -S localhost:8080
-
+`
+ git clone https://github.com/datameet/openpostbox openpostbox
+ cd openpostbox/html
+ php -S localhost:8080
+`
 
 ## Completed Tasks
 + Project setup
 + Scraping the data from instagram (batch)
 + Display of individual postbox page
++ Move to version there of [FatFreeFramework](http://fatfreeframework.com/)
++ Search by pincode
++ Map views for pincode
++ List by user
 
 ## Working on
-+ Search by pincode
 + Pincode tag cloud
 
 ## Future 
-+ Search by Location (given lat long)
-+ Search by Location (Give an actual address)
-+ Map views
++ Add geohash for each postbox as part of reverse geo coding
++ Search by Location (given lat long using geohash)
++ Search by Location (Give an actual address using geohash)
 + Reverse Geo code for city, state (batch)
-+ Search by user
-+ Store the instagrams locally
++ Store the pictures(instagrams) on s3
 + Add Notes/comments to each postboxpage
-+ JSON - API
++ JSON - API (end postbox, pincode by /geojson and resturn geojson)
 
 ##Note
 The same application can be used for any other instagram project. Say mapping dustbins or bus stops etc with very little change. Let me know if you plan to use it.
 
-> if you are serious about running this project locally then get your own [Instagram API keys](http://instagram.com/developer/) and replace it in [instagram.php](http://code.thejeshgn.com/postbox/src/tip/inc/instagram.php?at=default). As of now it uses my id. Please don't abuse.
+> if you are serious about running this project locally then get your own [Instagram API keys](http://instagram.com/developer/) and replace it in [instagram.php](https://github.com/datameet/openpostbox/blob/master/inc/instagram.php). As of now it uses my id. Please don't abuse.
 
 ##Signed by me
 All release are gpg signed by me using 0XBFFC8DD3C06DD6B0.
-[![endorse](http://api.coderwall.com/thejeshgn/endorsecount.png)](http://coderwall.com/thejeshgn)
 
 ##Screen shots
-![Initial screen](http://code.thejeshgn.com/postbox/raw/tip/docs/postbox_page.png)
+![Initial screen](https://raw.githubusercontent.com/datameet/openpostbox/master/docs/postbox_page.png)
 
 
 

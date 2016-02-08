@@ -38,9 +38,9 @@ $app->route('GET /license','Main->license');
 
 
 $app->route('GET /pb/id/@id','Postbox->postboxById');
+$app->route('GET /pincode/list','Postbox->pincode');
 
 /*
-$app->route('GET /pb/list/pincode','Postbox->pincode');
 $app->route('GET /pb/pincode/@pincode','Postbox->postboxListByPincode');
 $app->route('GET /pb/pincode/map/@pincode','Postbox->postboxMapByPincode');
 $app->route('GET /pb/search','Postbox->search');

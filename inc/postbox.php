@@ -1,32 +1,31 @@
 <?php
-/*
-class Postbox extends F3instance {
+
+class Postbox extends BaseController {
 	function postboxById() {
-		$id = $this->get('PARAMS["id"]');
-		$this->set('title','PostBox');
+		$id = $this->view->get('PARAMS["id"]');
+		$this->view->set('title','PostBox');
 		$caption = 'Error';
 		$out='';
 		if($id){
-			$POSTBOX_DB=F3::get('POSTBOX_DB');
-			$q = 'select * from post_box where post_id=:id';
-			$POSTBOX_DB->exec($q,array(':id' => $id));
-
+			$q = 'select * from post_box where post_id=:id limit 1';
+			$POSTBOX_DB=\F3::get('POSTBOX_DB');
+			$result= $POSTBOX_DB->exec($q,array(':id' => $id));
 			$post_id =null;
-			foreach (F3::get('POSTBOX_DB->result') as $row){
+			foreach ($result as $row){
 				$post_id = $row["post_id"];
-				$this->set('post_id',$post_id );			
-				$this->set('post_id',$row["post_id"]);
-				$this->set('picture_url',$row["picture_url"]);
-				$this->set('tags',$row["tags"]);
-				$this->set('lat',$row["lat"]);
-				$this->set('lan',$row["lan"]);
-				$this->set('created_time',$row["created_time"]);
-				$this->set('username',$row["username"]);
-				$this->set('website',$row["website"]);
-				$this->set('pincode',$row["pincode"]);
-				$this->set('img',$row["img"]);
-				$this->set('formatted_address',$row["formatted_address"]);
-				$this->set('caption',htmlspecialchars($row["caption"]));
+				$this->view->set('post_id',$post_id );			
+				$this->view->set('post_id',$row["post_id"]);
+				$this->view->set('picture_url',$row["picture_url"]);
+				$this->view->set('tags',$row["tags"]);
+				$this->view->set('lat',$row["lat"]);
+				$this->view->set('lan',$row["lan"]);
+				$this->view->set('created_time',$row["created_time"]);
+				$this->view->set('username',$row["username"]);
+				$this->view->set('website',$row["website"]);
+				$this->view->set('pincode',$row["pincode"]);
+				$this->view->set('img',$row["img"]);
+				$this->view->set('formatted_address',$row["formatted_address"]);
+				$this->view->set('caption',htmlspecialchars($row["caption"]));
 				$caption = $row["caption"];
 	        	break;
 	        }
@@ -35,47 +34,43 @@ class Postbox extends F3instance {
 				$map="http://maps.googleapis.com/maps/api/staticmap?center=";
 				$map=$map.$row["lat"].",".$row["lan"]."&zoom=17&size=400x300&markers=color:blue|label:P|";
 				$map=$map.$row["lat"].",".$row["lan"]."&sensor=true";
-				$this->set('map',$map);
-				$this->set('LANGUAGE','en-US');
-				$this->set('sub','sub_postbox.html');
-				$out=$this->render('basic/layout.html');
+				$this->view->set('map',$map);
+				$out=Template::instance()->render('basic/sub_postbox.html');
 	        }else{
-				$this->set('LANGUAGE','en-US');
-				$this->set('error_msg','No postbox exists with that id.');
-				$this->set('sub','sub_error.html');
-				$out=$this->render('basic/layout.html');
+				$this->view->set('error_msg','No postbox exists with that id.');
+				$out=Template::instance()->render('basic/sub_error.html');
 	        }
 		}else{
-			$this->set('LANGUAGE','en-US');
-			$this->set('error_msg','No postbox exists with that id.');
-			$this->set('sub','sub_error.html');
-			$out=$this->render('basic/layout.html');
+			$this->view->set('error_msg','No postbox exists with that id.');
+			$out=Template::instance()->render('basic/sub_error.html');		
 		}
 		
-		$this->set('sub_out_put',$out);
-		$this->set('caption',$caption);
-		$this->set('LANGUAGE','en-US');
-		echo $this->render('basic/main.html');
+		$this->view->set('caption',$caption);
+		$this->view->set('sub_out_put',$out);
+		echo Template::instance()->render('basic/main.html');
 	}
 
 	function pincode() {
-		$this->set('title','All Pincodes');
-		$this->set('caption','List of All pincode where we have mapped postboxes.');
+		$this->view->set('title','All Pincodes');
+		$this->view->set('caption','List of All pincode where we have mapped postboxes.');
 		$q = 'select pincode, total_post_boxes from pin_code order by pincode';
-		$pincode_count_array = array();
-		$POSTBOX_DB=F3::get('POSTBOX_DB');
-		$POSTBOX_DB->sql($q);
-		foreach (F3::get('POSTBOX_DB->result') as $row){
-			$pincode_count_array[$row["pincode"]] = $row["total_post_boxes"];
-        }
-        $this->set('pincode_count_array',$pincode_count_array);
-        $this->set('sub','sub_list_pincode.html');
-		$out=$this->render('basic/layout.html');
-		$this->set('sub_out_put',$out);
-		$this->set('LANGUAGE','en-US');		
-		echo $this->render('basic/main.html');
-	}
+		$array_all_pincodes = array();
+		$POSTBOX_DB=\F3::get('POSTBOX_DB');
+		$result= $POSTBOX_DB->exec($q);
 
+		foreach ($result as $row){
+			$single_pincode = array();
+			$single_pincode['pincode'] =  $row["pincode"];
+			$single_pincode['count'] = $row["total_post_boxes"];
+			$array_all_pincodes[$row["pincode"]]	= $single_pincode;
+        }
+
+        $this->view->set('array_all_pincodes',$array_all_pincodes);
+		$out=Template::instance()->render('basic/sub_list_pincode.html');
+		$this->view->set('sub_out_put',$out);
+		echo Template::instance()->render('basic/main.html');
+	}
+/*
 	function location() {
 		$this->set('title','Location');
 		$q = 'select * from post_box, pin_code where post_box.pincode = pin_code.pincode and post_box.loc = 1 and lat != "" order by pin_code.pincode ';
@@ -210,6 +205,7 @@ class Postbox extends F3instance {
 		$this->set('title','Location');
 		echo $this->render('basic/main.html');
 	}
-}
 */
+}
+
 ?>

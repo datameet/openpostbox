@@ -1,13 +1,13 @@
 <?php
 /*
-class TwitterService extends F3instance {
+class TwitterService extends BaseController {
 
 function startswith4($haystack, $needle) {
     return strpos($haystack, $needle) === 0;
 }
 
 function pull_data(){
-    $this->set('title','Twitter - Twitter Data Pull');
+    $this->view->set('title','Twitter - Twitter Data Pull');
     $api_url = 'http://search.twitter.com/search.json?q=openpostboxindia&include_entities=true';
 
     $ch = curl_init ($api_url);
@@ -67,13 +67,12 @@ function pull_data(){
             //check if post_id exists, if yes then go to next one. else insert
             $data_pull_messages[] = "Processing the post_id=".$post_id;
             $q = 'select count(*) as count_posts from post_box where post_id="'.$post_id.'"';
-            $POSTBOX_DB=F3::get('POSTBOX_DB');
-            $POSTBOX_DB->sql($q);
-            //print '\n'.$q; 
-            $count_posts = 0;
-            foreach (F3::get('POSTBOX_DB->result') as $row){
-                $count_posts = $row['count_posts'];
+            
+            $POSTBOX_DB=\F3::get('POSTBOX_DB');
+            $result = $POSTBOX_DB->exec($q);
 
+            foreach ($result as $row){
+                $count_posts = $row['count_posts'];
             }
             if ($count_posts == 0){
                 $data_pull_messages[] = "Lets INSERT.";
@@ -82,21 +81,20 @@ function pull_data(){
                 $i = $i.$picture_url .'","'.$all_tags .'","'.$lat .'","'.$lan .'","'.$created_time .'","';
                 $i = $i.$username .'","'.$website .'","'.$pincode .'","'.$caption .'"'.',"Twitter")';
                 print $i;
-                $POSTBOX_DB->sql($i);
+                $result = $POSTBOX_DB->exec($i);
             }else{
                 $data_pull_messages[] =  "Already exists.";
             }
 
         }
-    $this->set('LANGUAGE','en-US');
-    $this->set('sub','sub_data_pull.html');
-    $this->set('data_pull_messages',$data_pull_messages);
-    $out=$this->render('basic/layout.html');
-    $this->set('sub_out_put',$out);
-    $this->set('LANGUAGE','en-US');
-    echo $this->render('basic/main.html');
-}
 
+        $this->view->set('data_pull_messages',$data_pull_messages);
+        $out=Template::instance()->render('basic/sub_data_pull.html');      
+        $this->view->set('sub_out_put',$out);
+        echo Template::instance()->render('basic/main.html');
+
+}
+/*
 function pull_images(){
     $this->set('title','PostBox - Instagram Pull Pictures');
     $data_pull_messages = array();
@@ -128,8 +126,8 @@ function pull_images(){
     $this->set('LANGUAGE','en-US');
     echo $this->render('basic/main.html');
 }
-
+*/
 
 }//calss end
-*/
+
 ?>

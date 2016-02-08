@@ -5,12 +5,19 @@
     		<th> No of Postboxes </th>
     	</tr>
     </thead>
-    <? foreach ($this->get('pincode_count_array') as $pincode=>$count): ?>
+
     <tbody>
+    <repeat group="{{ @array_all_pincodes }}" value="{{ @single_pincode }}" >
           	<tr>
-    		<td> <a href='<?= $this->get('BASE'); ?>/pb/pincode/<?=$pincode; ?>'><?=$pincode; ?></a> </td>
-    		<td> <?= $count; ?> </td>
+    		<td> 
+                <a href='{{@BASE}}/pincode/{{@single_pincode['pincode']}}'>
+                    {{@single_pincode['pincode']}}
+                </a> 
+            </td>
+    		<td> 
+                {{@single_pincode['count']}} </td>
     		</tr>
+    </repeat>
      </tbody>
-    <? endforeach; ?>
+
 </table>

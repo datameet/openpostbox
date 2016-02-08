@@ -21,16 +21,19 @@ This is the actual application which end use can use for searching the postboxes
 + List by user
 
 ## Working on
-+ Pincode tag cloud
++ Store the pictures(instagrams) on s3
++ Add twitter integration
++ Add ODK integration
+
 
 ## Future 
 + Add geohash for each postbox as part of reverse geo coding
 + Search by Location (given lat long using geohash)
 + Search by Location (Give an actual address using geohash)
 + Reverse Geo code for city, state (batch)
-+ Store the pictures(instagrams) on s3
 + Add Notes/comments to each postboxpage
 + JSON - API (end postbox, pincode by /geojson and resturn geojson)
++ Pincode tag cloud
 
 ##Note
 The same application can be used for any other instagram project. Say mapping dustbins or bus stops etc with very little change. Let me know if you plan to use it.

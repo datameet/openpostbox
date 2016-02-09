@@ -8,6 +8,7 @@ $DB ='sqlite:../db/postbox_test.sqlite';
 
 $DEBUG_PROD=0;
 $DEBUG_TEST=4;
+
 $app->set('DEBUG',$DEBUG_TEST);
 $app->set('POSTBOX_DB',new DB\SQL($DB));
 $app->set('APP_LEVEL_SECRET_TOKEN','SECRET_TOEKN_PASSWORD_CHANGE');

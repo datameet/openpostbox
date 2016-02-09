@@ -12,7 +12,14 @@
     <repeat group="{{ @array_all_postboxes }}" value="{{ @post_box_array }}" >
 	    var marker = L.marker([{{@post_box_array['lat']}},{{@post_box_array['lan']}}]).addTo(map);
 	    var infohtml = "<b>{{@post_box_array['caption']}}</b><br>";
-	    infohtml = infohtml + "<img src='{{@post_box_array['picture_url']}}' width=100px height=100px /><br>";
+	    <check if="{{@img}}">
+	    	<true>
+	    	infohtml = infohtml + "<img src='{{@post_box_array['img']}}' width=100px height=100px /><br>";
+	    	</true>
+	    	<false>
+	    	infohtml = infohtml + "<img src='{{@post_box_array['picture_url']}}' width=100px height=100px /><br>";
+	    	</false>
+	    </check>
 	    infohtml = infohtml + "<a href='{{@BASE}}/pb/id/{{@post_box_array['post_id']}}'>Detailed Information</a>";
 		marker.bindPopup(infohtml);
     </repeat>

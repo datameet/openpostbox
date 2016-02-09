@@ -3,15 +3,27 @@
         <true>
             <div class="span4">
                 <a   href="{{@BASE}}/pb/id/{{@post_box_array['post_id']}}">
-                    <img title="{{@post_box_array['caption']}}" alt="{{@post_box_array['caption']}}" src="{{@post_box_array['picture_url'] }}" />    
+                    <check if="{{@img}}">
+                    <true>
+                        <img title="{{@post_box_array['caption']}}" alt="{{@post_box_array['caption']}}" src="{{@post_box_array['img'] }}" />    
+                    </true>
+                    <false>
+                        <img title="{{@post_box_array['caption']}}" alt="{{@post_box_array['caption']}}" src="{{@post_box_array['picture_url'] }}" />    
+                    </false>
+                    </check>
                 </a>
             </div>
         </true>
         <false>
             <div class="span2">
-                <a   href="{{@BASE}}/pb/id/{{@post_box_array['post_id']}}">
-                    <img title="{{@post_box_array['caption']}}" alt="{{@post_box_array['caption']}}" src="{{@post_box_array['picture_url'] }}" />    
-                </a>
+                    <check if="{{@img}}">
+                    <true>
+                        <img title="{{@post_box_array['caption']}}" alt="{{@post_box_array['caption']}}" src="{{@post_box_array['img'] }}" />    
+                    </true>
+                    <false>
+                        <img title="{{@post_box_array['caption']}}" alt="{{@post_box_array['caption']}}" src="{{@post_box_array['picture_url'] }}" />    
+                    </false>
+                    </check>
                 <br>&nbsp;
             </div>
         </false>

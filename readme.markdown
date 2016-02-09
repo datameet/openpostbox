@@ -5,29 +5,26 @@ This is the actual application which end use can use for searching the postboxes
 ## Install and run
 
 `
- git clone https://github.com/datameet/openpostbox openpostbox
-
- cd openpostbox/html
- 
- php -S localhost:8080
+git clone https://github.com/datameet/openpostbox openpostbox
+cd openpostbox/html
+php -S localhost:8080
 `
 
-## Completed Tasks
-+ Project setup
-+ Scraping the data from instagram (batch)
-+ Display of individual postbox page
-+ Move to version there of [FatFreeFramework](http://fatfreeframework.com/)
-+ Search by pincode
-+ Map views for pincode
-+ List by user
-
-## Working on
+## Tasks
++ ✓ Project setup
++ ✓ Scraping the data from instagram (batch)
++ ✓ Display of individual postbox page
++ ✓ Move to version there of [FatFreeFramework](http://fatfreeframework.com/)
++ ✓ Search by pincode
++ ✓ Map views for pincode
++ ✓ List by user
++ --
++ Deployment scripts
++ Pagination
 + Store the pictures(instagrams) on s3
 + Add twitter integration
 + Add ODK integration
-
-
-## Future 
++ --
 + Add geohash for each postbox as part of reverse geo coding
 + Search by Location (given lat long using geohash)
 + Search by Location (Give an actual address using geohash)

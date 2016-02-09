@@ -1,3 +1,4 @@
 temp
 /html/tmp
 postbox_prod.sqlite
+/db/postbox_prod.sqlite

@@ -3,7 +3,7 @@ date_default_timezone_set('Asia/Calcutta');
 $app=require __DIR__.'/../lib/base.php';
 require __DIR__.'/../utils/front_end.php';
 $app->set('AUTOLOAD','../inc/;');
-$DB ='sqlite:../db/postbox.sqlite';
+$DB ='sqlite:../db/postbox_test.sqlite';
 
 
 $DEBUG_PROD=0;

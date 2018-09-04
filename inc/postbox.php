@@ -15,15 +15,16 @@ class Postbox extends BaseController {
 				$post_id = $row["post_id"];
 				$this->view->set('post_id',$post_id );			
 				$this->view->set('post_id',$row["post_id"]);
-				$this->view->set('picture_url',$row["picture_url"]);
 				$this->view->set('tags',$row["tags"]);
 				$this->view->set('lat',$row["lat"]);
 				$this->view->set('lan',$row["lan"]);
 				$this->view->set('created_time',$row["created_time"]);
 				$this->view->set('username',$row["username"]);
 				$this->view->set('website',$row["website"]);
-				$this->view->set('pincode',$row["pincode"]);
-				$this->view->set('img',$row["img"]);
+				$this->view->set('pincode',$row["pincode"]);				
+				$img="http://openpostbox.org/img/".$row["img"];
+				$this->view->set('img',$img);
+				$this->view->set('picture_url',$img);
 				$this->view->set('formatted_address',$row["formatted_address"]);
 				$this->view->set('caption',htmlspecialchars($row["caption"]));
 				$caption = $row["caption"];
@@ -31,9 +32,9 @@ class Postbox extends BaseController {
 	        }
 
 	        if(isset($post_id)){
-				$map="http://maps.googleapis.com/maps/api/staticmap?center=";
-				$map=$map.$row["lat"].",".$row["lan"]."&zoom=17&size=400x300&markers=color:blue|label:P|";
-				$map=$map.$row["lat"].",".$row["lan"]."&sensor=true";
+				$map="http://staticmap.openstreetmap.de/staticmap.php?center=";
+				$map=$map.$row["lat"].",".$row["lan"]."&zoom=17&size=865x512&maptype=mapnik&markers=";
+				$map=$map.$row["lat"].",".$row["lan"]."lightblue1";
 				$this->view->set('map',$map);
 				$out=Template::instance()->render('basic/sub_postbox.html');
 	        }else{

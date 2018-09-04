@@ -16,8 +16,9 @@ class Main extends BaseController {
 			$single_postbox['lan']=	$row["lan"];
 			$single_postbox['pincode']=	$row["pincode"];	
 			$single_postbox['caption']=	$row["caption"];
-			$single_postbox['img']=	$row["img"];
-			$single_postbox['picture_url']=	$row["picture_url"];
+			$img="http://openpostbox.org/postboximg/".$row["img"];
+			$single_postbox['img']=	$img;
+			$single_postbox['picture_url']=	$img;
 			$array_all_postboxes[$row["post_id"]]	= $single_postbox;
         }
         $this->view->set('array_all_postboxes',$array_all_postboxes);

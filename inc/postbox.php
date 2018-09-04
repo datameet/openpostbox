@@ -22,7 +22,7 @@ class Postbox extends BaseController {
 				$this->view->set('username',$row["username"]);
 				$this->view->set('website',$row["website"]);
 				$this->view->set('pincode',$row["pincode"]);				
-				$img="http://openpostbox.org/img/".$row["img"];
+				$img="http://openpostbox.org/postboximg/".$row["img"];
 				$this->view->set('img',$img);
 				$this->view->set('picture_url',$img);
 				$this->view->set('formatted_address',$row["formatted_address"]);
@@ -32,9 +32,10 @@ class Postbox extends BaseController {
 	        }
 
 	        if(isset($post_id)){
-				$map="http://staticmap.openstreetmap.de/staticmap.php?center=";
-				$map=$map.$row["lat"].",".$row["lan"]."&zoom=17&size=865x512&maptype=mapnik&markers=";
-				$map=$map.$row["lat"].",".$row["lan"]."lightblue1";
+	        	$map="https://api.mapbox.com/styles/v1/mapbox/streets-v10/static/";
+				$map=$map.$row["lan"].",".$row["lat"].",9.67,0.00,0.00/865x512@2x?";
+				$map=$map."access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q";
+				//$map=$map.$row["lat"].",".$row["lan"]."lightblue1";
 				$this->view->set('map',$map);
 				$out=Template::instance()->render('basic/sub_postbox.html');
 	        }else{
